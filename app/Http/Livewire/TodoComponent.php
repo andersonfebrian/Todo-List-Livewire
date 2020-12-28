@@ -31,6 +31,9 @@ class TodoComponent extends Component
     }
 
     public function editTodo(Todo $todo){
+			foreach(Todo::all() as $refreshTodo){
+				$this->state[$refreshTodo->id] = 'edit'; 
+			}
 			$this->body = $todo->body;
 			$this->to_edit_id = $todo->id;
 			$this->state[$todo->id] = 'cancel';
