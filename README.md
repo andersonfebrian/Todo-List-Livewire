@@ -5,6 +5,8 @@ Built using [Laravel](https://laravel.com/) and [Livewire](https://laravel-livew
 If you are interested in knowing how to build this application you can view the tutorial [here](https://github.com/a3xgg/LaravelLivewireSetup/wiki).
 
 ## Cloning the repo  
+> Make an .env file from .env.example and change its content accordingly.  
+
 
 After cloning the repo, run the following commands under the project folder.  
 * `composer install`
