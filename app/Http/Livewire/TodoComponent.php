@@ -8,9 +8,6 @@ use App\Models\Todo;
 class TodoComponent extends Component
 {
 		public $body;
-		// public $is_completed = [];
-		public $state = [];
-		public $to_edit_id;
 		public $edited_todo;
 
     protected $listeners = ['refreshComponent' => '$refresh'];
@@ -21,38 +18,26 @@ class TodoComponent extends Component
 
     public function storeTodo(){
 			$this->validate();
-			$todo = Todo::create([
+			Todo::create([
 				'body' => $this->body
 			]);
 
-			$this->state[$todo->id] = 'edit';
-
-			$this->body = '';
+			$this->reset(['body']);
 			return $this->emitSelf('refreshComponent');
     }
 
     public function editTodo(Todo $todo){
 			$this->edited_todo = $todo;
-			// foreach(Todo::all() as $refreshTodo){
-			// 	$this->state[$refreshTodo->id] = 'edit'; 
-			// }
 			$this->body = $todo->body;
-			// $this->to_edit_id = $todo->id;
-			// $this->state[$todo->id] = 'cancel';
 			return $this->emit('refreshComponent');
 		}
 
 		public function updateTodo(){
 			$this->validate();
-			Todo::where('id', $this->to_edit_id)->update([
+			$this->edited_todo->update([
 				'body' => $this->body
 			]);
-
-			$this->state[$this->to_edit_id] = 'edit';
-
-			$this->to_edit_id = '';
-			$this->body = '';
-
+			$this->reset(['body', 'edited_todo']);
 			return $this->emitSelf('refreshComponent');
 		}
 		
@@ -69,12 +54,6 @@ class TodoComponent extends Component
 		public function todoStatus(Todo $todo){
 			$todo->update(['is_completed' => !$todo->is_completed]);
 			return $this->emitSelf('refreshComponent');
-		}
-
-		public function mount($state = 'edit'){
-			foreach(Todo::all() as $todo){
-				$this->state[$todo->id] = $state;
-			}
 		}
 
     public function render()
