@@ -8,9 +8,10 @@ use App\Models\Todo;
 class TodoComponent extends Component
 {
 		public $body;
-		public $is_completed = [];
+		// public $is_completed = [];
 		public $state = [];
 		public $to_edit_id;
+		public $edited_todo;
 
     protected $listeners = ['refreshComponent' => '$refresh'];
 
@@ -31,12 +32,13 @@ class TodoComponent extends Component
     }
 
     public function editTodo(Todo $todo){
-			foreach(Todo::all() as $refreshTodo){
-				$this->state[$refreshTodo->id] = 'edit'; 
-			}
+			$this->edited_todo = $todo;
+			// foreach(Todo::all() as $refreshTodo){
+			// 	$this->state[$refreshTodo->id] = 'edit'; 
+			// }
 			$this->body = $todo->body;
-			$this->to_edit_id = $todo->id;
-			$this->state[$todo->id] = 'cancel';
+			// $this->to_edit_id = $todo->id;
+			// $this->state[$todo->id] = 'cancel';
 			return $this->emit('refreshComponent');
 		}
 
@@ -54,10 +56,8 @@ class TodoComponent extends Component
 			return $this->emitSelf('refreshComponent');
 		}
 		
-		public function cancelTodo(Todo $todo){
-			$this->body = '';
-			$this->state[$todo->id] = 'edit';
-			$this->to_edit_id = '';
+		public function cancelTodo(){
+			$this->reset(['body', 'edited_todo']);
 			return $this->emit('refreshComponent');
 		}
 
@@ -67,13 +67,12 @@ class TodoComponent extends Component
 		}
 		
 		public function todoStatus(Todo $todo){
-			$todo->update(['is_completed' => $this->is_completed[$todo->id]]);
+			$todo->update(['is_completed' => !$todo->is_completed]);
 			return $this->emitSelf('refreshComponent');
 		}
 
 		public function mount($state = 'edit'){
 			foreach(Todo::all() as $todo){
-				$this->is_completed[$todo->id] = $todo->is_completed;
 				$this->state[$todo->id] = $state;
 			}
 		}
