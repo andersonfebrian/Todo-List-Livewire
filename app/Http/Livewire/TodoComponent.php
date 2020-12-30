@@ -58,6 +58,6 @@ class TodoComponent extends Component
 
     public function render()
     {
-			return view('livewire.todo-component', ['todos' => Todo::all()])->layout('index');
+			return view('livewire.todo-component', ['todos' => Todo::all()])->layout('layouts.main');
     }
 }
