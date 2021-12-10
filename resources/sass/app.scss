@@ -1,1 +1,22 @@
 //
+@import "~bootstrap/scss/bootstrap.scss";
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100vh;
+}
+
+p {
+    display: inline;
+    margin: 0;
+    padding: 0;
+}
+
+.text-through {
+    display: inline;
+    text-decoration: line-through;
+}
