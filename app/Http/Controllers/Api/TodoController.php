@@ -23,7 +23,9 @@ class TodoController extends Controller implements ApiResponseMessage
 
 	public function index(Request $request)
 	{
-		return $this->success();
+		$todos = Todo::all();
+
+		return $this->success($todos, 'Successfully Retrieved Todos.');
 	}
 
 	public function store(TodoStoreRequest $request)
