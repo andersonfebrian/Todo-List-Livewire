@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Todo;
+use App\Observers\TodoObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -18,7 +20,11 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        // Todo::class => [TodoObserver::class],
     ];
+
+    // Not in Laravel 7
+    // protected $observers = []; 
 
     /**
      * Register any events for your application.
