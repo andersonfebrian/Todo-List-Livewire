@@ -26,7 +26,7 @@ class TodoObserver
      */
     public function updated(Todo $todo)
     {
-        //
+        Log::info('Todo Updated', [$todo]);
     }
 
     /**
@@ -37,7 +37,7 @@ class TodoObserver
      */
     public function deleted(Todo $todo)
     {
-        //
+        Log::warning('Todo Deleted', [$todo]);
     }
 
     /**
