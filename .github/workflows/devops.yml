@@ -21,5 +21,6 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             echo hello
-            cd /var/www/html/
-            pwd
+            cd /var/www/html/todo_list
+            git fetch --tags
+            git checkout tags/$(git describe --abbrev=0)
