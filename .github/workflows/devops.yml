@@ -1,4 +1,4 @@
-name: Check Clone Result
+name: Pull Latest Changes onto Server
 
 on:
   push:
