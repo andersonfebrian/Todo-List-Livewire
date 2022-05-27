@@ -1,0 +1,25 @@
+name: Check Clone Result
+
+on:
+  push:
+    tags: 
+      - '*'
+
+jobs:
+  pull-latest:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: ssh to server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            echo hello
+            cd /var/www/html/
+            pwd
