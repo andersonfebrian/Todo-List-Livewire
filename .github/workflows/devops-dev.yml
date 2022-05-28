@@ -23,5 +23,5 @@ jobs:
             echo hello
             cd /var/www/html/todo_list
             sudo -S -u www-data /bin/bash -c 'git fetch --tags'
-            sudo -S -u www-data /bin/bash -c '$(git describe --tags $(git rev-list --tags --max-count=1))'
+            sudo -S -u www-data /bin/bash -c 'git checkout tags/$(git describe --tags $(git rev-list --tags --max-count=1))'
             sudo -S -u www-data /bin/bash -c 'git describe'
