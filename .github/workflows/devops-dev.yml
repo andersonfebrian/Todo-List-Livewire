@@ -1,9 +1,9 @@
-name: Pull Latest Changes onto Server
+name: Pull Latest Changes onto Dev Server
 
 on:
   push:
     tags: 
-      - 'prod-*'
+      - 'dev-*'
 
 jobs:
   pull-latest:
@@ -15,10 +15,10 @@ jobs:
       - name: ssh to server
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.KEY }}
-          port: ${{ secrets.PORT }}
+          host: ${{ secrets.HOST_DEV }}
+          username: ${{ secrets.USERNAME_DEV }}
+          key: ${{ secrets.KEY_DEV }}
+          port: ${{ secrets.PORT_DEV }}
           script: |
             echo hello
             cd /var/www/html/todo_list
