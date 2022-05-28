@@ -22,4 +22,5 @@ jobs:
           script: |
             echo hello
             cd /var/www/html/todo_list
+            sudo -S -u www-data /bin/bash -c 'git fetch --tags'
             sudo -S -u www-data /bin/bash -c 'git describe'
