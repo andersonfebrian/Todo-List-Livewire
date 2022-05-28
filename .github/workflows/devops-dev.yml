@@ -15,13 +15,11 @@ jobs:
       - name: ssh to server
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.HOST_DEV }}
-          username: ${{ secrets.USERNAME_DEV }}
-          key: ${{ secrets.KEY_DEV }}
-          port: ${{ secrets.PORT_DEV }}
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: ${{ secrets.PORT }}
           script: |
             echo hello
             cd /var/www/html/todo_list
-            sudo -S -u www-data /bin/bash -c 'git fetch --tags'
-            sudo -S -u www-data /bin/bash -c 'git checkout tags/$(git describe --tags $(git rev-list --tags --max-count=1))'
             sudo -S -u www-data /bin/bash -c 'git describe'
