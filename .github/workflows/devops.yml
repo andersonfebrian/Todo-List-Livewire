@@ -26,7 +26,8 @@ jobs:
           port: ${{ secrets.PORT }}
           key: ${{ secrets.KEY }}
           script: |
-            echo "RELEASE_VERSION=${{ github.ref:10 }}"
+            echo "RELEASE_VERSION=${{ github.ref }}"
+            
       # - name: ssh to server
       #   uses: appleboy/ssh-action@master
       #   with:
