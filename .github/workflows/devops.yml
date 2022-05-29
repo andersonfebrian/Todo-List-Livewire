@@ -13,7 +13,10 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: set env
-        run: echo "${GITHUB_REF#refs/tags/}"
+        run: echo "${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+
+      - name: echo github env
+        run: echo $GITHUB_ENV
 
       # - name: ssh to server
       #   uses: appleboy/ssh-action@master
