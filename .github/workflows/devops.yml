@@ -2,8 +2,8 @@ name: Pull Latest Changes onto Server
 
 on:
   push:
-    tags: 
-      - '*'
+    tags:
+      - "*"
 
 jobs:
   pull-latest:
@@ -26,8 +26,7 @@ jobs:
           port: ${{ secrets.PORT }}
           key: ${{ secrets.KEY }}
           script: |
-            echo "${{ github.ref }}"
-
+            echo "RELEASE_VERSION=${{ github.ref:10 }}"
       # - name: ssh to server
       #   uses: appleboy/ssh-action@master
       #   with:
@@ -38,6 +37,6 @@ jobs:
       #     script: |
       #       echo hello
       #       cd /var/www/html/todo_list
-          # sudo -S -u www-data /bin/bash -c 'git fetch --tags'
-          # sudo -S -u www-data /bin/bash -c 'git checkout tags/$(git describe --tags $(git rev-list --tags --max-count=1))'
-          # sudo -S -u www-data /bin/bash -c 'git describe'
+      # sudo -S -u www-data /bin/bash -c 'git fetch --tags'
+      # sudo -S -u www-data /bin/bash -c 'git checkout tags/$(git describe --tags $(git rev-list --tags --max-count=1))'
+      # sudo -S -u www-data /bin/bash -c 'git describe'
