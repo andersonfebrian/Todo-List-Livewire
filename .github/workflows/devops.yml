@@ -12,23 +12,21 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: set env
-        run: echo "RELEASE_VERSION=${GITHUB_REF:10}" >> $GITHUB_ENV
+      # - name: set env
+      #   run: echo "RELEASE_VERSION=${GITHUB_REF:10}" >> $GITHUB_ENV
 
-      - name: echo env variable
-        run: echo $RELEASE_VERSION
+      # - name: echo env variable
+      #   run: echo $RELEASE_VERSION
 
       - name: echo in ssh server for tag version
         uses: appleboy/ssh-action@master
-        env:
-          TAG_VERSION: $RELEASE_VERSION
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           port: ${{ secrets.PORT }}
           key: ${{ secrets.KEY }}
           script: |
-            echo $TAG_VERSION
+            echo "${GITHUB_REF:10}"
 
       # - name: ssh to server
       #   uses: appleboy/ssh-action@master
