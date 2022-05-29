@@ -18,6 +18,17 @@ jobs:
       - name: echo env variable
         run: echo $RELEASE_VERSION
 
+      - name: echo in ssh server for tag version
+        uses: appleboy/ssh-action@master
+        env:
+          TAG_VERSION: $RELEASE_VERSION
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          port: ${{ secrets.PORT }}
+          key: ${{ secrets.KEY }}
+          script: |
+
 
       # - name: ssh to server
       #   uses: appleboy/ssh-action@master
