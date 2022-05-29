@@ -26,7 +26,7 @@ jobs:
           port: ${{ secrets.PORT }}
           key: ${{ secrets.KEY }}
           script: |
-            echo "${GITHUB_REF:10}"
+            echo "${{ github.ref }}"
 
       # - name: ssh to server
       #   uses: appleboy/ssh-action@master
