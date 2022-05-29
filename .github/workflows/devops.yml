@@ -3,7 +3,7 @@ name: Pull Latest Changes onto Server
 on:
   push:
     tags: 
-      - 'prod-*'
+      - '*'
 
 jobs:
   pull-latest:
@@ -12,16 +12,19 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: ssh to server
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.KEY }}
-          port: ${{ secrets.PORT }}
-          script: |
-            echo hello
-            cd /var/www/html/todo_list
-            sudo -S -u www-data /bin/bash -c 'git fetch --tags'
-            sudo -S -u www-data /bin/bash -c 'git checkout tags/$(git describe --tags $(git rev-list --tags --max-count=1))'
-            sudo -S -u www-data /bin/bash -c 'git describe'
+      - name: set env
+        run: echo "${GITHUB_REF}"
+
+      # - name: ssh to server
+      #   uses: appleboy/ssh-action@master
+      #   with:
+      #     host: ${{ secrets.HOST }}
+      #     username: ${{ secrets.USERNAME }}
+      #     key: ${{ secrets.KEY }}
+      #     port: ${{ secrets.PORT }}
+      #     script: |
+      #       echo hello
+      #       cd /var/www/html/todo_list
+          # sudo -S -u www-data /bin/bash -c 'git fetch --tags'
+          # sudo -S -u www-data /bin/bash -c 'git checkout tags/$(git describe --tags $(git rev-list --tags --max-count=1))'
+          # sudo -S -u www-data /bin/bash -c 'git describe'
