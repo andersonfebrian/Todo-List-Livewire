@@ -32,7 +32,19 @@ jobs:
           script: |
             echo $RELEASE_VERSION
             echo [[ $RELEASE_VERSION =~ $REGEX ]]
-            [[ $RELEASE_VERSION =~ $REGEX ]] && echo "${BASH_REMATCH[0]}"
+            [[ $RELEASE_VERSION =~ $REGEX ]] && echo "VERSION=${BASH_REMATCH[0]}"
+            if [[ $VERSION =~ dev ]]
+            then
+              echo 'change to dev pwd'
+            elif [[ $VERSION =~ test ]]
+            then
+              echo 'change to test pwd'
+            else
+              echo 'not a proper test or dev tag'
+              exit 2
+            fi
+            pwd
+
           # if [[ $RELEASE_VERSION =~ $REGEX ]] 
           # then
           #   echo 'change dir'
