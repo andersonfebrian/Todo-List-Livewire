@@ -27,7 +27,7 @@ jobs:
             echo $RELEASE_VERSION
             echo [[ $RELEASE_VERSION =~ $REGEX ]]
             [[ $RELEASE_VERSION =~ $REGEX ]] && VERSION=${BASH_REMATCH[0]}
-
+          # a comment
             if [[ $VERSION =~ 'dev-' ]]
             then
               echo 'is dev'
