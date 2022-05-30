@@ -33,8 +33,7 @@ jobs:
             echo $RELEASE_VERSION
             echo [[ $RELEASE_VERSION =~ $REGEX ]]
             [[ $RELEASE_VERSION =~ $REGEX ]] && echo "VERSION=${BASH_REMATCH[0]}"
-            echo [[ $VERSION =~ '^(dev\-)' ]]
-            echo [[ $VERSION =~ '^(test\-)' ]]
+            echo $VERSION
             if [[ $VERSION =~ '^(dev\-)' ]]
             then
               echo 'change to dev pwd'
