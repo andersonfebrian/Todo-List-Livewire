@@ -29,9 +29,11 @@ jobs:
           key: ${{ secrets.KEY }}
           script: |
             echo "RELEASE_VERSION=${{ github.ref }}"
-            if [[ $RELEASE_VERSION =~ $REGEX ]]; then
+            if [[ $RELEASE_VERSION =~ $REGEX ]] 
+            then
               echo 'change dir'
-            elif [[ $RELEASE_VERSION =~ $REGEX ]];
+            elif [[ $RELEASE_VERSION =~ $REGEX ]]
+            then
               echo 'change dir another'
             fi
 
