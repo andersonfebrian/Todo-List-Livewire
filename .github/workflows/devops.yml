@@ -29,13 +29,14 @@ jobs:
           key: ${{ secrets.KEY }}
           script: |
             echo "RELEASE_VERSION=${{ github.ref }}"
-            if [[ $RELEASE_VERSION =~ $REGEX ]] 
-            then
-              echo 'change dir'
-            elif [[ $RELEASE_VERSION =~ $REGEX ]]
-            then
-              echo 'change dir another'
-            fi
+            [[ $RELEASE_VERSION =~ $REGEX ]] && echo "VERSION=${BASE_REMATCH[0]}"
+          # if [[ $RELEASE_VERSION =~ $REGEX ]] 
+          # then
+          #   echo 'change dir'
+          # elif [[ $RELEASE_VERSION =~ $REGEX ]]
+          # then
+          #   echo 'change dir another'
+          # fi
 
       # - name: ssh to server
       #   uses: appleboy/ssh-action@master
